@@ -1,7 +1,6 @@
 name: publish
 
 on:
-  push:
   pull_request:
 
 jobs:
