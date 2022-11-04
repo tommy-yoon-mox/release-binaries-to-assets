@@ -1,8 +1,6 @@
 name: publish
 on:
-  pull_request:
-    types:
-      - opened
+  - pull_request
 jobs:
   goreleaser:
     runs-on: ubuntu-latest
