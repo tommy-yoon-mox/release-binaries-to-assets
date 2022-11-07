@@ -31,6 +31,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: release_binaries
-          path: |
-            ./dist/release-binaries-to-assets_*
-            !checksums.txt
+          path: ./dist/*
