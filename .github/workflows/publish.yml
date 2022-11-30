@@ -10,9 +10,6 @@ jobs:
   goreleaser:
     runs-on: ubuntu-latest
     steps:
-      - name: Get the TAG
-        id: get_tag
-        run: echo ::set-output name=TAG::$(git show-ref --tags | grep ${{ github.sha }} | cut -d / -f 3)
       -
         name: Checkout
         uses: actions/checkout@v2
