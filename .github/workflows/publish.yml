@@ -5,7 +5,7 @@ on:
      - master
   pull_request:
     branches:
-      - main
+      - master
 jobs:
   goreleaser:
     runs-on: ubuntu-latest
@@ -29,6 +29,25 @@ jobs:
           args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - 
+        name: Get the TAG
+        id: get_tag
+        run: echo ::set-output name=TAG::$(git show-ref --tags | grep ${{ github.sha }} | cut -d / -f 3)
+      - 
+        name: Overwrite file
+        uses: "DamianReeves/write-file-action@master"
+        with:
+          path: ../../VERSION
+          write-mode: overwrite
+          contents: |
+            ${{ steps.get_tag.outputs.TAG }}
+      - 
+        name: Update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+            file-path: ../../VERSION
+            commit-msg: Update VERSION
+            github-token: ${{ secrets.GITHUB_TOKEN }}
       - 
         name: Upload assets
         if: ${{ github.event_name != 'pull_request' }}
