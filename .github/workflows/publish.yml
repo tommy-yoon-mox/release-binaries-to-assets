@@ -7,12 +7,23 @@ jobs:
   goreleaser:
     runs-on: ubuntu-latest
     steps:
+      - name: Get the TAG
+        id: get_tag
+        run: echo ::set-output name=TAG::$(git show-ref --tags | grep ${{ github.sha }} | cut -d / -f 3)
       -
         name: Checkout
         uses: actions/checkout@v2
       -
         name: Unshallow
         run: git fetch --prune --unshallow
+      - 
+        - name: Update resources
+            uses: test-room-7/action-update-file@v1
+            run: echo "Hello World"
+            with:
+                file-path: ../../VERSION
+                commit-msg: Update VERSION
+                github-token: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Set up Go
         uses: actions/setup-go@v2
