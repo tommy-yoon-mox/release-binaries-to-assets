@@ -24,7 +24,8 @@ jobs:
         with:
           path: ../../VERSION
           write-mode: overwrite
-          contents: ${{ steps.get_tag.outputs.TAG }}
+          contents: |
+            ${{ steps.get_tag.outputs.TAG }}
       - 
         name: Update resources
         uses: test-room-7/action-update-file@v1
