@@ -5,7 +5,7 @@ on:
      - master
   pull_request:
     branches:
-      - main
+      - master
 jobs:
   goreleaser:
     runs-on: ubuntu-latest
@@ -29,6 +29,10 @@ jobs:
           args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - 
+        name: Get the TAG
+        id: get_tag
+        run: echo ::set-output name=TAG::$(git show-ref --tags | grep ${{ github.sha }} | cut -d / -f 3)
       - 
         name: Upload assets
         if: ${{ github.event_name != 'pull_request' }}
