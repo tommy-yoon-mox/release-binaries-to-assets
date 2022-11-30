@@ -17,7 +17,6 @@ jobs:
         name: Unshallow
         run: git fetch --prune --unshallow
       - 
-<<<<<<< HEAD
         name: Update resources
         uses: test-room-7/action-update-file@v1
         run: echo "Hello World"
@@ -25,15 +24,6 @@ jobs:
             file-path: ../../VERSION
             commit-msg: Update VERSION
             github-token: ${{ secrets.GITHUB_TOKEN }}
-=======
-        - name: Update resources
-          uses: test-room-7/action-update-file@v1
-          run: echo ${{ steps.get_tag.outputs.TAG }}; echo steps.get_tag.outputs.TAG;
-          with:
-              file-path: ../../VERSION
-              commit-msg: Update VERSION
-              github-token: ${{ secrets.GITHUB_TOKEN }}
->>>>>>> 91a78167628e9bcac50f1a5edb862cc084e602d1
       -
         name: Set up Go
         uses: actions/setup-go@v2
