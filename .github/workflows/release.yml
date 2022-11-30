@@ -1,15 +1,13 @@
 name: Release
 
 on:
-  pull_request:
-    types: [closed]
+  push:
+    branches:
+     - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    if: github.event.pull_request.merged
-    
     steps:
       - name: Tag
         uses: K-Phoen/semver-release-action@master
@@ -17,3 +15,20 @@ jobs:
           release_branch: master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+      name: Overwrite file
+      uses: "DamianReeves/write-file-action@master"
+      with:
+        path: ../../VERSION
+        write-mode: overwrite
+        contents: ${{ steps.get_tag.outputs.TAG }}
+      - 
+        name: Update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+            file-path: ../../VERSION
+            commit-msg: Update VERSION
+            github-token: ${{ secrets.GITHUB_TOKEN }}
