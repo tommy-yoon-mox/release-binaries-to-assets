@@ -18,7 +18,7 @@ jobs:
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
         with:
-          path: path/to/file.js
+          path: ${{ github.workspace }}
           write-mode: overwrite
           contents: |
             'hello world'
