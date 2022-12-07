@@ -14,15 +14,11 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - 
         name: Get tag
         id: tag
-        uses: dawidd6/action-get-tag@v1
-        with:
-          strip_v: true
+        run: echo ::set-output name=TAG::$(git show-ref --tags | grep ${{ github.sha }} | cut -d / -f 3)
       - 
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
