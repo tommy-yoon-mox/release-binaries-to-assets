@@ -26,7 +26,7 @@ jobs:
           path: VERSION
           write-mode: overwrite
           contents: |
-            ${{steps.tag.outputs.tag}}
+            ${{steps.tag.outputs.TAG}}
       - 
         name: Commit & Push
         uses: Andro999b/push@v1.3
