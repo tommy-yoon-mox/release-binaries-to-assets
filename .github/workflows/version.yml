@@ -18,9 +18,6 @@ jobs:
         name: Get latest tag
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
-      -
-        name: echo stuff
-        run: echo ${{ steps.get-latest-tag.outputs.tag }}
       - 
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
@@ -28,7 +25,7 @@ jobs:
           path: ${{ github.workspace }}/VERSION
           write-mode: overwrite
           contents: |
-            ${{ steps.get_tag.outputs.tag }}
+            ${{ steps.get-latest-tag.outputs.tag }}
       - 
         name: Commit & Push
         uses: Andro999b/push@v1.3
