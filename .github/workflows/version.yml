@@ -19,12 +19,12 @@ jobs:
         name: Get tag
         id: tag
         # run: echo ::set-output name=TAG::$(git show-ref --tags | grep ${{ github.sha }} | cut -d / -f 3)
-        run: echo "hello world"
+        run: echo ${{ GITHUB_WORKSPACE }}
       - 
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
         with:
-          path: VERSION
+          path: ./VERSION
           write-mode: overwrite
           contents: |
             ${{steps.tag.outputs.TAG}}
