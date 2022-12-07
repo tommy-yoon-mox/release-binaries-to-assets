@@ -24,7 +24,7 @@ jobs:
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
         with:
-          path: ./VERSION
+          path: ${{ github.workspace }}/VERSION
           write-mode: overwrite
           contents: |
             ${{steps.tag.outputs.TAG}}
