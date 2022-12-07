@@ -15,10 +15,9 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       - 
-        name: GitHub Tag Name example
-        run: |
-          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+        name: Get the TAG
+        id: get_tag
+        run: echo ::set-output name=TAG::$(git show-ref --tags | grep ${{ github.sha }} | cut -d / -f 3)
       - 
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
