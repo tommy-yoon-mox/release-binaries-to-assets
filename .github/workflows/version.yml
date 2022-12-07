@@ -27,7 +27,7 @@ jobs:
           path: ${{ github.workspace }}/VERSION
           write-mode: overwrite
           contents: |
-          ${{ steps.get_release.outputs.tag_name }}
+            ${{ steps.get_release.outputs.tag_name }}
       - 
         name: Commit & Push
         uses: Andro999b/push@v1.3
