@@ -15,19 +15,13 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       - 
-        name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.3.2
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-      - 
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
         with:
           path: ${{ github.workspace }}/VERSION
           write-mode: overwrite
           contents: |
-            ${{ steps.get_release.outputs.tag_name }}
+            ${{ github.ref_name }}
       - 
         name: Commit & Push
         uses: Andro999b/push@v1.3
