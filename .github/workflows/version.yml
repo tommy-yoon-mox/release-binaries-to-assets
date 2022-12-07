@@ -14,10 +14,20 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
-
       - 
-        name: Update version
-        uses: brettdorrans/write-version-to-file@master
+        name: Overwrite file
+        uses: "DamianReeves/write-file-action@master"
         with:
-          filename: 'VERSION'
+          path: path/to/file.js
+          write-mode: overwrite
+          contents: |
+            'hello world'
+      - 
+        name: Commit & Push
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
+          force: true
+          message: 'Overwritten by Github Actions - ${date}'
       
