@@ -1,0 +1,38 @@
+name: Version
+
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_run:
+    workflows: ["Release"]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+        with:
+          strip_v: true
+      - 
+        name: Overwrite file
+        uses: "DamianReeves/write-file-action@master"
+        with:
+          path: VERSION
+          write-mode: overwrite
+          contents: |
+            ${{steps.tag.outputs.tag}}
+      - 
+        name: Commit & Push
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
+          message: 'Overwritten by Github Actions - ${date}'
