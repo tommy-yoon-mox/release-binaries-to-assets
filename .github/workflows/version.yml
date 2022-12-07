@@ -15,23 +15,12 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       - 
-        name: Get tag
-        id: get_tag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        name: Get latest tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
       -
-        name: echo '${{ steps.get_tag.outputs.tag }}'
-        run: echo ${{ steps.get_tag.outputs.tag }}  
-      - 
-        name: Set output
-        id: vars
-        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
-      - 
-        name: Check output
-        env:
-          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ steps.vars.outputs.tag }}
+        name: echo stuff
+        run: echo ${{ steps.get-latest-tag.outputs.tag }}
       - 
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
