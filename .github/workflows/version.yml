@@ -19,7 +19,7 @@ jobs:
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
       -
-        name: Remove v
+        name: Remove v from tag
         id: remove_v
         run: |
           export no_v=$(echo ${{ steps.get-latest-tag.outputs.tag}} | tr 'v' ' ')
