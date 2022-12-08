@@ -19,9 +19,11 @@ jobs:
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
       -
-        name: echo stuff
+        name: Remove v
+        id: remove_v
         run: |
-          echo ${{ {steps.get-latest-tag.outputs.tag}//v / }}
+          export no_v=$(echo ${{ steps.get-latest-tag.outputs.tag}} | tr 'v' ' ')
+          echo::set-output name=tag::$no_v
       - 
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
@@ -29,7 +31,7 @@ jobs:
           path: ${{ github.workspace }}/VERSION
           write-mode: overwrite
           contents: |
-            ${{ steps.get-latest-tag.outputs.tag//v/ / }}
+            ${{ steps.remove_v.outputs.tag }}
       - 
         name: Commit & Push
         uses: Andro999b/push@v1.3
