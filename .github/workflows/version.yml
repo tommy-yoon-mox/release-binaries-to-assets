@@ -21,9 +21,6 @@ jobs:
       -
         name: echo stuff
         run: |
-          echo ${{ steps.get-latest-tag.outputs.tag//v/ / }}
-          echo steps.get-latest-tag.outputs.tag
-          echo ${{ "steps.get-latest-tag.outputs.tag//v/ /" }}
           echo ${{ {steps.get-latest-tag.outputs.tag}//v / }}
       - 
         name: Overwrite file
