@@ -23,7 +23,7 @@ jobs:
         id: remove_v
         run: |
           export no_v=$(echo ${{ steps.get-latest-tag.outputs.tag}} | tr 'v' ' ')
-          echo::set-output name=tag::$no_v
+          echo ::set-output name=tag::$no_v
       - 
         name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
