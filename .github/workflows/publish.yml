@@ -2,9 +2,10 @@ name: publish
 on:
   pull_request:
     branches:
-     - master
+      - master
   pull_request:
-    types: [closed]
+    branches:
+      - master
       
 jobs:
   semver_release:
