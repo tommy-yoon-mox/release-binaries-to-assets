@@ -8,19 +8,7 @@ on:
       - master
       
 jobs:
-  semver_release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Tag
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: K-Phoen/semver-release-action@master
-        with:
-          release_branch: master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   goreleaser:
-    needs: semver_release
     runs-on: ubuntu-latest
     steps:
       -
