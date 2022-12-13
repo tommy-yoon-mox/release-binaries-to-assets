@@ -1,19 +1,19 @@
-# name: Release
+name: Release
 
-# on:
-#   push:
-#     branches:
-#       - master
+on:
+  pull_request:
+    types: [closed]
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Tag
-#         if: ${{ github.event_name != 'pull_request' }}
-#         uses: K-Phoen/semver-release-action@master
-#         with:
-#           release_branch: master
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged
+    steps:
+      - name: Tag
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: K-Phoen/semver-release-action@master
+        with:
+          release_branch: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
